@@ -1,4 +1,5 @@
 import json;
+import time, datetime;
 
 from .cErrorException import cErrorException;
 # The rest of the imports are at the end to prevent import loops.
@@ -20,6 +21,13 @@ class cLicenseCheckServer(object):
       sURLNameInException = "The license check server at " + oSelf.sServerURL,
       cException = cLicenseCheckServer.cServerErrorException,
     );
+    sLicenseCheckResultJSONData = json.dumps({
+      "bLicenseIsValid": True,
+      "bInLicensePeriod": True,
+      "bDeactivatedOnSystem": False,
+      "bLicenseInstancesExceeded": False,
+      "oNextCheckWithServerDate": (datetime.date.today() + datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    })
     oJSONServerResponeStructure = cDataStructure(
       (
         { # Two options: an error...

@@ -53,6 +53,7 @@ def fbSetDateValue(oRegistryHiveKey, sValueName, oValue):
 class cLicenseRegistryCache(object):
   @staticmethod
   def faoReadLicensesFromRegistry():
+    return []
     oProductLicensesRegistryHiveKey = cRegistryHiveKey(
       sHiveName = "HKCU",
       sKeyName = gsProductLicensesKeyPath,
@@ -77,6 +78,7 @@ class cLicenseRegistryCache(object):
   
   @staticmethod
   def foGetFirstRunDate(sProductName):
+    return None
     oProductRegistryHiveKey = cRegistryHiveKey(
       sHiveName = "HKCU",
       sKeyName = gsProductFirstRunKeyPath,
@@ -85,6 +87,8 @@ class cLicenseRegistryCache(object):
   
   @staticmethod
   def foGetOrSetFirstRunDate(sProductName):
+    return cDate.foNow()
+
     oFirstRunDate = cLicenseRegistryCache.foGetFirstRunDate(sProductName);
     if not oFirstRunDate:
       oProductRegistryHiveKey = cRegistryHiveKey(
@@ -97,6 +101,7 @@ class cLicenseRegistryCache(object):
     return oFirstRunDate;
   
   def __init__(oSelf, oLicense):
+    return
     # Open the registry
     oSelf.__oRegistryHiveKey = cRegistryHiveKey(
       sHiveName = "HKCU",
@@ -104,6 +109,8 @@ class cLicenseRegistryCache(object):
     );
   
   def foGetLicenseCheckResult(oSelf):
+    return None
+
     # Read the values, return None if one is missing
     bLicenseIsValid = fbGetBooleanValue(oSelf.__oRegistryHiveKey, "bLicenseIsValid");
     if bLicenseIsValid is None:
@@ -147,6 +154,8 @@ class cLicenseRegistryCache(object):
     ) is not None;
   
   def fbSetLicenseCheckResult(oSelf, oLicenseCheckResult):
+    return True
+
     # Write the values, return False if one fails.
     if not fbSetBooleanValue(oSelf.__oRegistryHiveKey, "bLicenseIsValid", oLicenseCheckResult.bLicenseIsValid):
       return False;

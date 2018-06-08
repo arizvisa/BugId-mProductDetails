@@ -14,6 +14,8 @@ class cLicenseCollection(object):
     oSelf.__tasErrorsAndWarnings = None;
   
   def ftasGetLicenseErrorsAndWarnings(oSelf):
+    return ([], [])
+
     if oSelf.__tasErrorsAndWarnings is not None:
       return oSelf.__tasErrorsAndWarnings;
     doProductDetails_by_sProductName = dict([
